@@ -130,7 +130,7 @@ function Home() {
                <button variant='text' className='soru-secenekleri' onClick={()=>kontrol(sorular[sayi].ans3,sorular[sayi])}>{sorular[sayi].ans3}</button>
                <button variant='text' className='soru-secenekleri' onClick={()=>kontrol(sorular[sayi].ans4,sorular[sayi])}>{sorular[sayi].ans4}</button>
             </Box>
-                  : <center><Typography variant='h6'>Sonuçlar</Typography> 
+                  : <center><Typography variant='h6'>Sonuçlar</Typography> <br/>
                   <Box sx={{display:'flex',justifyContent:'center',alignItems:'center'}}><CheckIcon color='success'sx={{fontSize:'30px',mr:0.5}} /> {skor}</Box>
                   <Box sx={{display:'flex',justifyContent:'center',alignItems:'center'}}><ClearIcon color='error' sx={{fontSize:'30px',mr:0.5}}/> {yanlis}</Box> <br/>
                   <button onClick={()=>newgame()} className='tekraroyna'>Tekrar Oyna <ReplayIcon/></button> <br/> <br/>
