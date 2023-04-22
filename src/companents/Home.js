@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { sorular } from '../sorular';
 import '../css/Home.css'
-import Button from '@mui/material/Button';
 import Cevaplar from './Cevaplar';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import ReplayIcon from '@mui/icons-material/Replay';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
 
 function Home() {
     const [rastgelesayidizisi, setrastgelesayidizisi] = useState([]);  // her seferinde farklı soru gelmesini sağlayan değişken
@@ -21,7 +25,7 @@ function Home() {
     const rastgelesayiolustur = () => { // üretilen sayı+1 soru idsini veriyor 5 ürerildi 6.soruyu gösteririz
         var rastgeleSayi;
         do{
-            rastgeleSayi = Math.floor(Math.random() * sorular.length);
+            rastgeleSayi = Math.floor(Math.random() * sorular.length)
         }
         while (rastgelesayidizisi.includes(rastgeleSayi)); // rastegedizisinde o sayı varsa yeni sayı üretir yoksa aşşağı iner
         if(rastgelesayidizisi.length===sorusayisi) // 4 adet soru gösterip oyunu bitirir
@@ -87,6 +91,12 @@ function Home() {
     const sorusayisibelirle=(e)=>{
         setsorusayisi(parseInt(e.target.value)) 
     }
+    const Radiostyle ={
+      color: '#A16AFE',
+       '&.Mui-checked': {
+        color: '#A16AFE',
+      }, 
+    }
 
   return (
     <div>
@@ -96,35 +106,37 @@ function Home() {
         </Box>
 
         <Box sx={{display:'flex',justifyContent:'center'}}>
-           <Box>
+           <Box >
            {
             !start ? <>
-            <FormControl>
-            <FormLabel id="demo-controlled-radio-buttons-group">Soru Sayısı</FormLabel>
+            <FormControl sx={{ml:3}}>
+            <Typography sx={{color:'#2A2F4F'}}>Soru Sayısı</Typography>
             <RadioGroup
               row
               onChange={(e)=>sorusayisibelirle(e)} 
             >
-              <FormControlLabel value="4" control={<Radio />} label="4" />
-              <FormControlLabel value="8" control={<Radio />} label="8" />
-              <FormControlLabel value="12" control={<Radio />} label="12" />
+              <FormControlLabel value="4" control={<Radio sx={Radiostyle}/>} label="4" />
+              <FormControlLabel value="8" control={<Radio sx={Radiostyle}/>} label="8" />
+              <FormControlLabel value="12" control={<Radio sx={Radiostyle}/>} label="12" />
             </RadioGroup>
           </FormControl> <br/>
-            <button onClick={startgame} className='oyunu-baslat'>Oyunu Başlat </button> </>:
+            <button onClick={startgame} className='oyunu-baslat' style={{marginTop:'15px'}}>Oyunu Başlat </button> </>:
             !complated ? 
             <Box sx={{width:'350px'}}>  {/* sorular divi */}
                <Box sx={{textAlign:'center',fontSize:'20px'}} className='soru-baslik'>Soru {sorunumarasi}/{sorusayisi}</Box>
-               <Box sx={{backgroundColor:'lightyellow',textAlign:'center',p:2}}>{sorular[sayi]?.soru}</Box>
+               <Box className='soru-alani'>{sorular[sayi]?.soru}</Box>
                <button variant='text' className='soru-secenekleri' onClick={()=>kontrol(sorular[sayi].ans1,sorular[sayi])}>{sorular[sayi].ans1}</button>
                <button variant='text' className='soru-secenekleri' onClick={()=>kontrol(sorular[sayi].ans2,sorular[sayi])}>{sorular[sayi].ans2}</button>
                <button variant='text' className='soru-secenekleri' onClick={()=>kontrol(sorular[sayi].ans3,sorular[sayi])}>{sorular[sayi].ans3}</button>
                <button variant='text' className='soru-secenekleri' onClick={()=>kontrol(sorular[sayi].ans4,sorular[sayi])}>{sorular[sayi].ans4}</button>
             </Box>
-                  : <center>doğru cevap sayınız {skor} <br/> <br/> 
-                  <button onClick={()=>newgame()}>Tekrar Oyna</button> <br/> <br/>
-                  <button onClick={homepage}>Ana Sayfaya Dön</button> <br/> <br/> 
+                  : <center><Typography variant='h6'>Sonuçlar</Typography> 
+                  <Box sx={{display:'flex',justifyContent:'center',alignItems:'center'}}><CheckIcon color='success'sx={{fontSize:'30px',mr:0.5}} /> {skor}</Box>
+                  <Box sx={{display:'flex',justifyContent:'center',alignItems:'center'}}><ClearIcon color='error' sx={{fontSize:'30px',mr:0.5}}/> {yanlis}</Box> <br/>
+                  <button onClick={()=>newgame()} className='tekraroyna'>Tekrar Oyna <ReplayIcon/></button> <br/> <br/>
+                  <button onClick={homepage} className='anasayfa'>Ana Sayfaya Dön <HomeOutlinedIcon fontSize='small'/></button> <br/> <br/> 
                   { // cevapgoster true ise göster butonu ekranda gözükmez false ise gözükür
-                    cevapgoster ? null:<button onClick={()=>setcevapgoster(true)}>Cevapları Göster</button>
+                    cevapgoster ? null:<button onClick={()=>setcevapgoster(true)} className='cevapaç'>Cevapları Göster <KeyboardArrowDownOutlinedIcon/></button>
                   }
                   
                   { // cevapgöster true ise cavaplar gösterilir false ise gösterilmez

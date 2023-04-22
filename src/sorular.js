@@ -139,4 +139,14 @@ export const sorular =[
         cevap:'<strong>',
         verilencevap:'',
     },
+    {
+        id:'15',
+        soru:'html dosya uzantısı nedir',
+        ans1:'.css',
+        ans2:'.htm',
+        ans3:'.hltm',
+        ans4:'.html',
+        cevap:'.html',
+        verilencevap:'',
+    },
 ]

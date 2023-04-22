@@ -9,7 +9,7 @@ function Cevaplar({rastgelesayidizisi}) {
                 rastgelesayidizisi.map((value,i)=>
              <Box sx={{width:'350px'}} key={i}>  {/* sorular divi */}
                <Box sx={{textAlign:'center',fontSize:'20px',mt:2}} className='soru-baslik'>Soru {i+1}</Box>
-               <Box sx={{backgroundColor:'lightyellow',textAlign:'center',p:2}}>{sorular[value].soru}</Box>
+               <Box className='soru-alani'>{sorular[value].soru}</Box>
                {
                     sorular[value].ans1 === sorular[value].cevap ?
                     <div className='soru-cevaplari dogru' >{sorular[value].ans1}</div> :
